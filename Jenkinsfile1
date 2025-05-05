@@ -42,7 +42,7 @@ pipeline{
             }
             steps{
                 echo 'SonarQube analysis started...'
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('sonarsever') {
                     sh '''$scannerhome/bin/sonar-scanner -Dsonar.projectKey=maven-web-application \
                     -Dsonar.projectName=maven-web-application \
                     -Dsonar.projectVersion=1.0 \
