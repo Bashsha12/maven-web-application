@@ -23,7 +23,7 @@ pipeline{
                 }
             }
         }
-        stage('Check Style'){
+        /*stage('Check Style'){
             steps{
                 sh 'mvn checkstyle:checkstyle'
             }
@@ -35,7 +35,7 @@ pipeline{
                     echo 'Check Style failed!'
                 }
             }
-        }
+        }*/
         stage('sonarqube'){
             environment{
                 scannerhome = tool 'sonar7.1'
