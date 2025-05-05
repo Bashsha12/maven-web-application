@@ -37,7 +37,7 @@ pipeline{
             }
         }
         stage('sonarqube'){
-            environmet{
+            environment{
                 scannerhome = tool 'sonar7.1'
             }
             steps{
