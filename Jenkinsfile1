@@ -36,7 +36,7 @@ pipeline{
                 }
             }
         }
-        stage('SonarQube'){
+        stage('sonarqube'){
             environmet{
                 scannerhome = tool 'sonar7.1'
             }
