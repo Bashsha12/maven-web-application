@@ -25,7 +25,7 @@ pipeline{
         }
         stage('Check Style'){
             steps{
-                sh 'mvn checkstyle:check'
+                sh 'mvn checkstyle:checkstylecheck'
             }
             post{
                 success{
