@@ -1,0 +1,64 @@
+pipeline{
+    agent any
+    tools{
+        maven 'MAVEN' 
+        jdk 'JDK17'
+    }
+    stages{
+        stage('Checkout'){
+            steps{
+                git branch: 'master', url: 'https://github.com/Bashsha12/maven-web-application.git'
+            }
+        }
+        stage('Build'){
+            steps{
+                sh 'mvn clean package -DskipTests'
+            }
+            post{
+                success{
+                    echo 'Build was successful!'
+                }
+                failure{
+                    echo 'Build failed!'
+                }
+                success{
+                    echo 'Build was successful!'
+                }
+            }
+        }
+        stage('Check Style'){
+            steps{
+                sh 'mvn checkstyle:check'
+            }
+            post{
+                success{
+                    echo 'Check Style was successful!'
+                }
+                failure{
+                    echo 'Check Style failed!'
+                }
+            }
+        }
+        stage('SonarQube'){
+            environmet{
+                scannerhome = tool 'sonar7.1'
+            }
+            steps{
+                echo 'SonarQube analysis started...'
+                withSonarQubeEnv('SonarQube') {
+                    sh '''$scannerhome/bin/sonar-scanner -Dsonar.projectKey=maven-web-application \
+                    -Dsonar.projectName=maven-web-application \
+                    -Dsonar.projectVersion=1.0 \
+                    -Dsonar.sources=src/ \
+                    -Dsonar.java.binaries=target/classes \
+                    -Dsonar.junit.reportPath=target/surefire-reports \
+                    -Dsonar.jacoco.reportPaths=target/jacoco.exec \
+                    -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml \
+                    '''
+                }
+
+            }
+        }
+        
+    }
+}
