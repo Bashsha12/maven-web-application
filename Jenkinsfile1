@@ -89,7 +89,7 @@ pipeline{
                 groupId: 'QA',
                 protocol: 'http',
                 repository: 'maven-web-application',
-                version: '${env.BUILD_NUMBER}'
+                version: 'env.BUILD_NUMBER'
                 echo 'Artifact uploaded to Nexus!'
             }
         }    
