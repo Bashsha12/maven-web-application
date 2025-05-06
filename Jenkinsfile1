@@ -77,23 +77,27 @@ pipeline{
                 }
             }
         }
-        stage('Upload to Nexus'){
-            steps{
-                //def versionTag = env.BUILD_NUMBER
-                nexusArtifactUploader artifacts: [[artifactId: 'maven-web-application', 
+        stage('Upload to Nexus') {
+             steps {
+                nexusArtifactUploader(
+            artifacts: [[
+                artifactId: 'maven-web-application',
                 classifier: '',
-                 file: 'target/maven-web-application.war',
-                 type: 'war']], 
-                credentialsId: 'nexuslogin', 
-                nexusUrl: '172.31.41.195:8081', 
-                nexusVersion: 'nexus3', 
-                groupId: 'QA',
-                protocol: 'http', 
-                repository: 'maven-web-application', 
-                //version: '${versionTag}'
-                echo 'Artifact uploaded to Nexus!'
-            }
-        }
+                file: 'target/maven-web-application.war',
+                type: 'war'
+            ]],
+            credentialsId: 'nexuslogin',
+            nexusUrl: '172.31.41.195:8081',
+            nexusVersion: 'nexus3',
+            groupId: 'QA',
+            protocol: 'http',
+            repository: 'maven-web-application'
+            // version: versionTag // You can uncomment this if versionTag is defined
+        )
+        echo 'Artifact uploaded to Nexus!'
+    }
+}
+
         
     }
     post{
