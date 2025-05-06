@@ -73,7 +73,10 @@ pipeline{
         }
         stage('Upload to Nexus'){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'maven-web-application', classifier: '', file: 'target/maven-web-application.war', type: 'war']], 
+                nexusArtifactUploader artifacts: [artifactId: 'maven-web-application', 
+                classifier: '',
+                 file: 'target/maven-web-application.war',
+                 type: 'war'], 
                 credentialsId: 'nexuslogin', 
                 nexusUrl: '172.31.41.195:8081', 
                 nexusVersion: 'nexus3', 
