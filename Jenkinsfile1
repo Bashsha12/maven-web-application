@@ -79,6 +79,7 @@ pipeline{
         }
         stage('Upload to Nexus'){
             steps{
+                def versionTag = env.BUILD_NUMBER
                 nexusArtifactUploader artifacts: [[artifactId: 'maven-web-application', 
                 classifier: '',
                  file: 'target/maven-web-application.war',
@@ -89,7 +90,7 @@ pipeline{
                 groupId: 'QA',
                 protocol: 'http', 
                 repository: 'maven-web-application', 
-                version: '${env.BUILD_NUMBER}'
+                version: '${versionTag}'
                 echo 'Artifact uploaded to Nexus!'
             }
         }
