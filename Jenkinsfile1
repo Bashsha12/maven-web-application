@@ -84,7 +84,7 @@ pipeline{
                  file: 'target/maven-web-application.war',
                  type: 'war']], 
                 credentialsId: 'nexuslogin',
-                nexusUrl: ' 172.31.119.178:8081', 
+                nexusUrl: '100.113.51.58:8081', 
                 nexusVersion: 'nexus3',
                 groupId: 'QA',
                 protocol: 'http',
